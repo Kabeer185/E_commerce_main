@@ -86,9 +86,9 @@
     <div class="container">
         <!-- BEGIN section-title -->
         <h4 class="section-title clearfix">
-            <a href="#" class="pull-right">SHOW ALL</a>
+            <a href="{% url 'product_category' category='promotion' %}" class="pull-right">SHOW ALL</a>
             Exclusive promotions
-            <small>from 25 September 2016 - 1 January 2017</small>
+            <small>from 25 September 2024 - 25 January 2025</small>
         </h4>
         <!-- END section-title -->
         <!-- BEGIN row -->
@@ -241,7 +241,7 @@
     <div class="container">
         <!-- BEGIN section-title -->
         <h4 class="section-title clearfix">
-            <a href="#" class="pull-right">SHOW ALL</a>
+            <a href="{% url 'product_category' category='mobile' %}" class="pull-right">SHOW ALL</a>
             Mobile Phones
             <small>Shop and get your favourite phone at amazing prices!</small>
         </h4>
@@ -251,12 +251,12 @@
             <!-- BEGIN category-sidebar -->
             <div class="category-sidebar">
                 <ul class="category-list">
-                    <li class="list-header">Top Categories</li>
                     {% for mobile_brand in mobile_products %}
 
                         <li><a href="mobile={{ mobile_brand.brand.brand_name }}">{{mobile_brand.brand.brand_name}}</a></li>
     
-                    {% endfor %}
+                    {% endfor %} <li class="list-header">Top Categories</li>
+                   
                     {% comment %} <li><a href="#">Microsoft</a></li>
                     <li><a href="#">Samsung</a></li>
                     <li><a href="#">Apple</a></li>
@@ -330,7 +330,7 @@
     <div class="container">
         <!-- BEGIN section-title -->
         <h4 class="section-title clearfix">
-            <a href="#" class="pull-right">SHOW ALL</a>
+            <a href="{% url 'product_category' category='tablet' %}" class="pull-right">SHOW ALL</a>
             Tablet
             <small>Shop and get your favourite tablet at amazing prices!</small>
         </h4>

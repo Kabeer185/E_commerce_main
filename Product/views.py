@@ -1,6 +1,6 @@
 from django.forms import ValidationError
 from django.shortcuts import get_object_or_404, redirect, render
-from django.http import HttpResponse
+from django.http import Http404
 from .models import *
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
@@ -108,6 +108,7 @@ def product_detail(request, id):
         print(review)
         try:
             product = ProductModel.objects.get(id=id)
+            # discounted_price = product.price-(product.price*10%)
         except ProductModel.DoesNotExist:
             
             print("Product does not exist.")
@@ -159,15 +160,15 @@ def product(request):
     }
     
     return render(request, "product.html",context=context)
-
-# def product_list_view(request, pk):
-#     products = ProductModel.objects.filter(category__id=pk)
-#     paginator = Paginator(products, 3)  # Show 10 products per page
-
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-
-#     context = {
-#         'products': page_obj,
-#     }
-#     return render(request, 'product.html', context=context)
+def product_page(request, category=None):
+    if category=='promotion':
+        promotions = Promotions.objects.all()
+        products = [promo.product for promo in promotions]
+        context = products
+    elif category == "mobile":
+        context = ProductModel.objects.filter(category__name="Mobile")
+    elif category == "tablet":
+        context = ProductModel.objects.filter(category__name="Tablet")
+    else:
+        raise Http404("Category not found")  
+    return render(request, "product.html", {"items": context})

@@ -13,6 +13,7 @@ class Category(models.Model):
         ("Accessories","Accessories"),
         ("Computer","Computer"),
         ("TV","TV"),
+        ("promotion","promotion")
     ]
     name =models.CharField(max_length=100, choices=DEVISE_CHOICES)
     def __str__(self) -> str:
