@@ -8,11 +8,9 @@ from .models import User, Profile
 from .helpers import send_forget_password_mail
 import uuid
 from django.core.cache import cache 
-from django.views.decorators.cache import cache_control
    
 
 # Login view
-# @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def Login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -92,8 +90,6 @@ def ChangePassword(request, token):
             user.set_password(new_password)
             user.save()
 
-            # profile_obj.forget_password_token = token
-            # profile_obj.save()
 
             messages.success(request, 'Password changed successfully. Please log in.')
             return redirect('/login/')
