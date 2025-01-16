@@ -13,7 +13,6 @@ class Category(models.Model):
         ("Accessories","Accessories"),
         ("Computer","Computer"),
         ("TV","TV"),
-        ("promotion","promotion")
     ]
     name =models.CharField(max_length=100, choices=DEVISE_CHOICES)
     def __str__(self) -> str:
@@ -35,36 +34,20 @@ class ProductModel(models.Model):
     price = models.IntegerField(default=0)
     item_discount_price=models.IntegerField(default=0)
     Trending_product = models.BooleanField(default=False,help_text="@-default,1-Trending")
-
-    # def __str__(self) -> str:
-    #     return self.item_title
-
-class Promotions(models.Model):
-    product =models.ForeignKey(ProductModel, on_delete=models.CASCADE)
-    first = models.BooleanField(default=False)
-    seconds = models.BooleanField(default=False)
-    third = models.BooleanField(default=False)
-    forth = models.BooleanField(default=False)
-    fifth = models.BooleanField(default=False)
+    Promotion_product = models.BooleanField(default=False,help_text="@-default,1-Promotion")
 
     def __str__(self) -> str:
-        return self.product.item_title
+        return self.item_title
+
 
 class Slider(models.Model):
     product =models.ForeignKey(ProductModel, on_delete=models.CASCADE)
-    back = models.ImageField(upload_to="assets/img/")
-    first = models.BooleanField(default=False)
-    seconds = models.BooleanField(default=False)
-    third = models.BooleanField(default=False)
+    background_img = models.ImageField(upload_to="assets/img/")
 
-    # def __str__(self) -> str:
-    #     return self.product.item_title
 class ProductDescription(models.Model):
     name = models.CharField(max_length=100)
     desc = models.CharField(max_length=300)
     image = models.ImageField(upload_to="assets/img/")
-
-
 
 class Review(models.Model):
     product = models.ForeignKey(ProductModel, on_delete=models.CASCADE)

@@ -24,14 +24,13 @@ class product_mod_reg(admin.ModelAdmin):
         "item_discount_price",
         "off",
         "Trending_product",
+        # "Slider_product",
+        "Promotion_product",
     ]
-@admin.register(Promotions)
-class pormotion_mod_reg(admin.ModelAdmin):
-    list_display =["id","first","seconds","third","forth","fifth","product"]
 
 @admin.register(Slider)
-class slider_mod_reg(admin.ModelAdmin):
-    list_display = ["id","back","first","seconds","third","product"]
+class slider(admin.ModelAdmin):
+    list_display = ["id","product","background_img"]
 
 @admin.register(ProductDescription)
 class ProductDescModl(admin.ModelAdmin):

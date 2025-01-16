@@ -157,4 +157,3 @@ SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_SECURE = False  # Use True for production with HTTPS
 
 
-

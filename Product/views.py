@@ -4,10 +4,9 @@ from django.http import Http404
 from .models import *
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.cache import cache_control
 
+#create your views here 
 
-# @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url='login/')
 def home(request):
     ##mobile
@@ -20,13 +19,13 @@ def home(request):
         mobile_products=ProductModel.objects.filter(category__name="Mobile")
     mobile_products = mobile_products[:6]
     user = request.user
-    
+#Slider 
+    sliders = Slider.objects.all()    
 ##trending
     trending_product  = ProductModel.objects.filter(Trending_product=1)[:6]
+## promotions
+    Promotion_product  = ProductModel.objects.filter(Promotion_product=1)[:5]
 ##tablet
-    brand_name = Brand.objects.all()
-    
-
     category = Category.objects.all()
 
     
@@ -45,35 +44,13 @@ def home(request):
     product_sony=ProductModel.objects.filter(brand__brand_name="Sony")
     product_microsoft=ProductModel.objects.filter(brand__brand_name="Microsoft")
 
-###pormotion
-    first_promotion =Promotions.objects.filter(first=True).first()
-    second_promotion =Promotions.objects.filter(seconds=True).first()
-    third_promotion =Promotions.objects.filter(third=True).first()
-    forth_promotion =Promotions.objects.filter(forth=True).first()
-    fifth_promotion =Promotions.objects.filter(fifth=True).first()
-
-###Sliders   
-    first_slider =Slider.objects.filter(first=True).first()
-    second_slider =Slider.objects.filter(seconds=True).first()
-    third_slider=Slider.objects.filter(third=True).first()
-
-   
-
     data = {
-
         'user':user, #user
         "mobile_products": mobile_products, #mobile
         "tablet_products": tablet_products,#tablet
         'Trending_product':trending_product,#trending
-        'first_promotion':first_promotion, #promotion
-        'second_promotion':second_promotion, #promotion
-        'third_promotion':third_promotion, #promotion
-        'forth_promotion':forth_promotion, #promotion
-        'fifth_promotion':fifth_promotion, #promotion
-        'first_slider':first_slider, #slider
-        'second_slider':second_slider, #slider
-        'third_slider':third_slider, #slider
-
+        'Promotion_product':Promotion_product,#promotion
+        'sliders':sliders,#slider 
         ##Header
         'product_apple':product_apple,
         'product_Samsung':product_Samsung,
@@ -94,8 +71,6 @@ def index_inverse_header(request):
 
 @login_required(login_url='/login/')
 def product_detail(request, id):
-    # products = product_mod.objects.filter(category__id=pk, )
-    # print(products)
     product = get_object_or_404(ProductModel, id=id)
     product_desc = ProductDescription.objects.all()
     reviews = Review.objects.filter(product=product)
@@ -108,7 +83,6 @@ def product_detail(request, id):
         print(review)
         try:
             product = ProductModel.objects.get(id=id)
-            # discounted_price = product.price-(product.price*10%)
         except ProductModel.DoesNotExist:
             
             print("Product does not exist.")
@@ -162,9 +136,7 @@ def product(request):
     return render(request, "product.html",context=context)
 def product_page(request, category=None):
     if category=='promotion':
-        promotions = Promotions.objects.all()
-        products = [promo.product for promo in promotions]
-        context = products
+        context = ProductModel.objects.filter(Promotion_product=True)
     elif category == "mobile":
         context = ProductModel.objects.filter(category__name="Mobile")
     elif category == "tablet":

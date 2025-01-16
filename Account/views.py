@@ -2,7 +2,7 @@
 ###2
 from django.shortcuts import HttpResponse, redirect, render
 # from django.views.decorators.cache import never_cache
-from django.contrib.auth import authenticate, login ,logout as auth_logout
+from django.contrib.auth import authenticate, login ,logout 
 from django.contrib import messages
 from .models import User, Profile
 from .helpers import send_forget_password_mail
@@ -55,22 +55,8 @@ def Register(request):
 # Logout view
 
 def Logout(request):
-    auth_logout(request)
-
-    request.session.flush()
-    cache.clear()
-    response = redirect('/login/')
-    for key in request.COOKIES:
-        response.delete_cookie(key)
-        
-    
-    
-    # Redirect and clear cookies
-    
-    response.delete_cookie('sessionid')
-    response.delete_cookie('csrftoken')
-    return response
-
+    logout(request)
+    return redirect('/login/')
 
 # Change password view
 def ChangePassword(request, token):
