@@ -8,7 +8,7 @@ class AddToCart(models.Model):
     product = models.ForeignKey(ProductModel,on_delete=models.CASCADE)
     image = models.ImageField(null=True,blank=True)
     price=models.IntegerField(default=0)
-    quantity = models.PositiveBigIntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self) -> str:
         return self.product.brand.brand_name

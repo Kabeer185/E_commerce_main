@@ -213,20 +213,7 @@
 
                         <li><a href="mobile={{ mobile_brand.brand.brand_name }}">{{mobile_brand.brand.brand_name}}</a></li>
     
-                    {% endfor %} <li class="list-header">Top Categories</li>
-                   
-                    {% comment %} <li><a href="#">Microsoft</a></li>
-                    <li><a href="#">Samsung</a></li>
-                    <li><a href="#">Apple</a></li>
-                    <li><a href="#">Micromax</a></li>
-                    <li><a href="#">Karbonn</a></li>
-                    <li><a href="#">Intex</a></li>
-                    <li><a href="#">Sony</a></li>
-                    <li><a href="#">HTC</a></li>
-                    <li><a href="#">Asus</a></li>
-                    <li><a href="#">Nokia</a></li>
-                    <li><a href="#">Blackberry</a></li>
-                    <li><a href="#">All Brands</a></li> {% endcomment %}
+                    {% endfor %} 
                 </ul>
             </div>
             <!-- END category-sidebar -->
@@ -298,18 +285,11 @@
             <!-- BEGIN category-sidebar -->
             <div class="category-sidebar">
                 <ul class="category-list">
-                    <li class="list-header">Top Categories</li>
                     {% for tablet_brand in tablet_products %}
 
                         <li><a href="tablet={{ tablet_brand.brand.brand_name }}">{{tablet_brand.brand.brand_name}}</a></li>
     
                     {% endfor %}
-                    {% comment %} <li><a href="#">Apple</a></li>
-                    <li><a href="#">HP</a></li>
-                    <li><a href="#">Huawei</a></li>
-                    <li><a href="#">Samsung</a></li>
-                    <li><a href="#">Sony</a></li>
-                    <li><a href="#">All Brands</a></li> {% endcomment %}
                 </ul>
             </div>
             <!-- END category-sidebar -->

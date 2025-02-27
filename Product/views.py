@@ -9,10 +9,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login/')
 def home(request):
-    ##mobile
+##mobile
     mobile = request.POST.get('mobile',None)
-    
-    print(mobile)
     if mobile:
         mobile_products =ProductModel.objects.filter(category__name="Mobile",brand__brand_name=mobile)[:6]
     else:

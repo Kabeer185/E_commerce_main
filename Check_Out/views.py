@@ -14,7 +14,6 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def checkout_cart(request ):
     if request.method == "POST":
         product_id = request.POST.get("prod_id")
-        print(product_id)
         products = get_object_or_404(ProductModel, id=product_id)
         AddToCart.objects.get_or_create(
             user=request.user,product=products, image=products.image, price=products.price, 
